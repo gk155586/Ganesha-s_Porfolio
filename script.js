@@ -640,6 +640,11 @@ function initResumeModal() {
 
   function open(e) {
     if (e) e.preventDefault();
+    // Cache bust the iframe
+    const iframe = modal.querySelector('iframe');
+    if (iframe) {
+      iframe.src = 'Ganesh_Kalapad_Resume.pdf?t=' + new Date().getTime();
+    }
     modal.classList.add('open');
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -778,6 +783,11 @@ function initCommandPalette() {
       const resumeModal = document.getElementById('resumeModal');
       const backdrop = document.getElementById('lbBackdrop');
       if (resumeModal && backdrop) {
+        // Cache bust the iframe
+        const iframe = resumeModal.querySelector('iframe');
+        if (iframe) {
+          iframe.src = 'Ganesh_Kalapad_Resume.pdf?t=' + new Date().getTime();
+        }
         resumeModal.classList.add('open');
         backdrop.classList.add('open');
         document.body.style.overflow = 'hidden';
