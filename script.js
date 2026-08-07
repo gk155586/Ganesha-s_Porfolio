@@ -390,6 +390,7 @@ function initLightbox() {
   document.querySelectorAll('.cert-card--real').forEach(card => {
     card.addEventListener('click', (e) => {
       if (e.target.closest('.ct-btn')) return; // Do not trigger lightbox if tab button was clicked
+      if (e.target.closest('.cert-dots')) return; // Do not trigger lightbox if carousel dots were clicked
       
       if (card.dataset.pdf) {
         window.open(card.dataset.pdf, '_blank', 'noopener,noreferrer');
@@ -397,7 +398,10 @@ function initLightbox() {
       }
       
       let certIdx;
-      if (card.classList.contains('cert-card--multi')) {
+      if (card.classList.contains('cert-card--carousel')) {
+        const activeSlide = card.querySelector('.cert-slide.active');
+        certIdx = +activeSlide.dataset.cert;
+      } else if (card.classList.contains('cert-card--multi')) {
         const activeTab = card.querySelector('.ct-btn.active');
         certIdx = +activeTab.dataset.cert;
       } else {
@@ -853,6 +857,53 @@ function initCommandPalette() {
   });
 }
 
+
+/* ── Certifications Carousel Slider ── */
+function initCertCarousels() {
+  document.querySelectorAll('.cert-card--carousel').forEach(card => {
+    const slides = card.querySelectorAll('.cert-slide');
+    const dots = card.querySelectorAll('.dot');
+    const slideNum = card.querySelector('.current-slide-num');
+    
+    if (slides.length <= 1) return;
+    
+    let currentIdx = 0;
+    const intervalTime = 4000; // Slide every 4s
+    
+    function showSlide(nextIdx) {
+      slides[currentIdx].classList.remove('active');
+      dots[currentIdx].classList.remove('active');
+      
+      currentIdx = nextIdx;
+      
+      slides[currentIdx].classList.add('active');
+      dots[currentIdx].classList.add('active');
+      
+      if (slideNum) {
+        slideNum.textContent = currentIdx + 1;
+      }
+    }
+    
+    let slideInterval = setInterval(() => {
+      const nextIdx = (currentIdx + 1) % slides.length;
+      showSlide(nextIdx);
+    }, intervalTime);
+    
+    dots.forEach((dot, dotIdx) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation(); // Don't trigger lightbox when clicking indicators
+        clearInterval(slideInterval);
+        showSlide(dotIdx);
+        
+        slideInterval = setInterval(() => {
+          const nextIdx = (currentIdx + 1) % slides.length;
+          showSlide(nextIdx);
+        }, intervalTime);
+      });
+    });
+  });
+}
+
 /* ════════════════════════════════════════════
    INIT ALL
    ════════════════════════════════════════════ */
@@ -878,6 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeModal();
   initCommandPalette();
   initNavBrandClick();
+  initCertCarousels();
   logBranding();
 });
 

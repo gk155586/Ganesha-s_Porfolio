@@ -940,6 +940,54 @@ a.pub-chip:hover {
   color: var(--amber) !important;
 }
 
+/* ── Certificate Carousel Styles ── */
+.cert-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cert-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+.cert-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+.cert-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+.cert-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.cert-dots .dot:hover {
+  background: rgba(255,255,255,0.7);
+  transform: scale(1.1);
+}
+.cert-dots .dot.active {
+  background: var(--cyan);
+  width: 14px;
+  border-radius: 100px;
+  box-shadow: 0 0 6px var(--cyan);
+}
+
 /* ════════════════════════════════════════════
    CERTIFICATIONS GALLERY
    ════════════════════════════════════════════ */
