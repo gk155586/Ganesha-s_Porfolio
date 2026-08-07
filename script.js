@@ -391,6 +391,11 @@ function initLightbox() {
     card.addEventListener('click', (e) => {
       if (e.target.closest('.ct-btn')) return; // Do not trigger lightbox if tab button was clicked
       
+      if (card.dataset.pdf) {
+        window.open(card.dataset.pdf, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      
       let certIdx;
       if (card.classList.contains('cert-card--multi')) {
         const activeTab = card.querySelector('.ct-btn.active');

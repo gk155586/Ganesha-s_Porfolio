@@ -930,6 +930,14 @@ html[data-theme="light"] .nav-brand:hover .gk-nav-logo path {
   padding:5px 12px; border-radius:8px;
   background:rgba(245,158,11,.08); border:1px solid rgba(245,158,11,.2);
   font-size:.75rem; color:var(--amber);
+  transition: all 0.25s var(--ease);
+  cursor: pointer;
+}
+a.pub-chip:hover {
+  background: rgba(245,158,11,0.18) !important;
+  border-color: rgba(245,158,11,0.4) !important;
+  transform: translateY(-1px);
+  color: var(--amber) !important;
 }
 
 /* ════════════════════════════════════════════
