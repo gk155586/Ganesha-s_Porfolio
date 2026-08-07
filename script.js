@@ -259,8 +259,9 @@ function initCertFilters() {
 
       const filter = btn.dataset.filter;
       cards.forEach(card => {
-        const cat = card.dataset.category;
-        if (filter === 'all' || cat === filter) {
+        const cat = card.dataset.category || '';
+        const categories = cat.split(',').map(c => c.trim());
+        if (filter === 'all' || categories.includes(filter)) {
           card.classList.remove('hide');
         } else {
           card.classList.add('hide');
@@ -336,7 +337,11 @@ function initLightbox() {
     const indices = [];
     document.querySelectorAll('.cert-card--real').forEach(card => {
       if (!card.classList.contains('hide')) {
-        if (card.classList.contains('cert-card--multi')) {
+        if (card.classList.contains('cert-card--carousel')) {
+          card.querySelectorAll('.cert-slide').forEach(slide => {
+            indices.push(+slide.dataset.cert);
+          });
+        } else if (card.classList.contains('cert-card--multi')) {
           card.querySelectorAll('.ct-btn').forEach(btn => {
             indices.push(+btn.dataset.cert);
           });
