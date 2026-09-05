@@ -618,8 +618,9 @@ function initProjectFilters() {
       const filter = btn.dataset.filter;
 
       cards.forEach(card => {
-        const cat = card.dataset.category;
-        if (filter === 'all' || cat === filter) {
+        const cat = card.dataset.category || '';
+        const categories = cat.split(',').map(c => c.trim());
+        if (filter === 'all' || categories.includes(filter)) {
           card.classList.remove('hide');
           // Brief timeout for transition trigger
           setTimeout(() => card.classList.remove('fade-out'), 20);
