@@ -799,7 +799,7 @@ html[data-theme="light"] .nav-brand:hover .gk-nav-logo path {
   opacity:0; transition:opacity .3s;
 }
 .proj-card:hover .proj-glow { opacity:1; }
-.proj-featured { grid-column:1/-1; background:linear-gradient(135deg,rgba(99,102,241,.05),rgba(6,182,212,.03)); border-color:rgba(99,102,241,.2); }
+.proj-featured { background:linear-gradient(135deg,rgba(99,102,241,.05),rgba(6,182,212,.03)); border-color:rgba(99,102,241,.25); }
 .proj-top { display:flex; justify-content:space-between; align-items:center; }
 .proj-badge {
   padding:4px 12px; border-radius:100px;
@@ -2037,18 +2037,18 @@ body::after {
 /* ── Project Key Contributions List ── */
 .proj-points-list {
   list-style: none;
-  margin: 14px 0;
+  margin: 6px 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
 }
 .proj-points-list li {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text2);
-  padding-left: 18px;
+  padding-left: 16px;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 .proj-points-list li::before {
   content: '▸';
